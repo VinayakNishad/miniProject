@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AquaAdventure</string>
+    <string name="login">Login</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Register</string>
+    <string name="navLogin">Already have an account? login.</string>
+    <string name="navRegister">Don\'t have an account? signup</string>
+    <string name="logout">logout</string>
+    <string name="user_detail">User Detail</string>
+</resources>
