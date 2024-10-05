@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AquaAdventure</string>
+    <string name="et_uname">User Name</string>
+    <string name="et_uemail">User Email</string>
+    <string name="et_upassword">User Password</string>
+    <string name="et_uphone">User Phone</string>
+    <string name="et_uaddress">User Address</string>
+    <string name="et_urole">User Role</string>
+    <string name="et_uprofile">User Profile</string>
+    <string name="save">Save</string>
+</resources>

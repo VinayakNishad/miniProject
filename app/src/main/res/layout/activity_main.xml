@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/uname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_uname"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/uemail"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_uemail"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/upassword"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_upassword"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/uphone"
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_uphone"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/uaddress"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_uaddress"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/urole"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_urole"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/uprofile"
+        android:inputType="textUri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_uprofile"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:layout_margin="10dp"
+        android:minHeight="48dp"
+        android:padding="12dp"/>
+</LinearLayout>
