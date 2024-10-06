@@ -25,7 +25,7 @@ public class UserDetails extends AppCompatActivity {
 
         setContentView(R.layout.activity_user_details);
 //        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("copywrite");
-//        databaseReference.setValue("Vinayak Coding");
+//        databaseReference.setValue("Vinayak Codings");
         DatabaseReference user = FirebaseDatabase.getInstance().getReference("user");
         String userId = user.push().getKey();
         UserModel userModel = new UserModel("Vinayak Nishad","Zariwada Podocem","7558397994","vn07244@gmail.com","password");
