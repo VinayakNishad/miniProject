@@ -10,15 +10,21 @@
     android:gravity="center">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/user_detail"
         android:id="@+id/userDetail"
-        android:textSize="24sp"/>
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:gravity="center"
+        android:text="@string/user_detail"
+        android:textSize="24sp" />
+
+    <Button
         android:id="@+id/logout"
-        android:text="@string/logout"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:text="@string/logout"
+        android:layout_marginTop="0dp"
+        app:icon="@drawable/baseline_logout_24" />
 
 </LinearLayout>

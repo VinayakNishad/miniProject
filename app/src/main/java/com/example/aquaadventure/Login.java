@@ -60,8 +60,6 @@ public class Login extends AppCompatActivity {
         btn_log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pgbar.setVisibility(View.VISIBLE);
-
                 String email,password;
                 email = String.valueOf(et_email.getText());
                 password = String.valueOf(et_password.getText());
@@ -73,6 +71,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"Please Enter Password",Toast.LENGTH_LONG).show();
                     return;
                 }
+                pgbar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
