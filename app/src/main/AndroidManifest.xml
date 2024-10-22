@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AquaAdventure"
+        android:theme="@style/BackButtonActionBar"
         tools:targetApi="31">
         <activity
             android:name=".getActivity.ActivityDetail"
@@ -31,26 +31,31 @@
             android:exported="false" />
         <activity
             android:name=".Map"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".Login"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Account"
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Home"
+            android:exported="false"
+            android:theme="@style/MyThemeNoActionBar">
+
 
         </activity>
 

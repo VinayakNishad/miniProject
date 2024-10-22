@@ -7,14 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.aquaadventure.Login;
-import com.example.aquaadventure.MainActivity;
+import com.example.aquaadventure.Account;
 import com.example.aquaadventure.R;
 
 public class AdminLogin extends AppCompatActivity {
@@ -32,7 +27,7 @@ public class AdminLogin extends AppCompatActivity {
                 String check = "vn5543@#";
                 String login = uniqueId.getText().toString();
                 if(check.equals(login)){
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent i = new Intent(getApplicationContext(), Account.class);
                     startActivity(i);
                     finish();
                 }

@@ -37,4 +37,5 @@
     <string name="logo">Logo</string>
     <string name="image">Image</string>
     <string name="title">Title</string>
+    <string name="account">Account</string>
 </resources>

@@ -1,28 +1,20 @@
 package com.example.aquaadventure;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,23 +31,15 @@ public class Register extends AppCompatActivity {
     DatabaseReference mDatabase;
 
     @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-            finish();
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Initialize FirebaseAuth and FirebaseDatabase reference
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
+        // Link XML views
         et_fname = findViewById(R.id.fullname);
         et_address = findViewById(R.id.address);
         et_phone = findViewById(R.id.phone);
@@ -66,6 +50,7 @@ public class Register extends AppCompatActivity {
         pgbar = findViewById(R.id.pgbar);
         tv_navLogin = findViewById(R.id.navLogin);
 
+        // Handle navigation to Login
         tv_navLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,36 +60,57 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        // Register button click event
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email, password, cpassword, fullName, phone, address;
-                fullName = String.valueOf(et_fname.getText());
-                phone = String.valueOf(et_phone.getText());
-                address = String.valueOf(et_address.getText());
-                email = String.valueOf(et_email.getText());
-                password = String.valueOf(et_password.getText());
-                cpassword = String.valueOf(et_cpassword.getText());
+                String email = et_email.getText().toString().trim();
+                String password = et_password.getText().toString().trim();
+                String cpassword = et_cpassword.getText().toString().trim();
+                String fullName = et_fname.getText().toString().trim();
+                String phone = et_phone.getText().toString().trim();
+                String address = et_address.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Register.this, "Please Enter Email", Toast.LENGTH_LONG).show();
+                // Input validation
+                if (TextUtils.isEmpty(fullName)) {
+                    et_fname.setError("Full Name is required.");
                     return;
                 }
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(Register.this, "Please Enter a Valid Email", Toast.LENGTH_LONG).show();
+
+                if (TextUtils.isEmpty(phone)) {
+                    et_phone.setError("Phone is required.");
                     return;
                 }
+
+                if (TextUtils.isEmpty(address)) {
+                    et_address.setError("Address is required.");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    et_email.setError("Please enter a valid email.");
+                    return;
+                }
+
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Register.this, "Please Enter Password", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if (!password.equals(cpassword)) {
-                    Toast.makeText(Register.this, "Password and Confirm Password should be same", Toast.LENGTH_LONG).show();
+                    et_password.setError("Password is required.");
                     return;
                 }
 
+                if (password.length() < 6) {
+                    et_password.setError("Password must be at least 6 characters.");
+                    return;
+                }
+
+                if (!password.equals(cpassword)) {
+                    et_cpassword.setError("Passwords do not match.");
+                    return;
+                }
+
+                // Show progress bar
                 pgbar.setVisibility(View.VISIBLE);
 
+                // Create user in Firebase
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -113,29 +119,31 @@ public class Register extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Get user ID and save additional details to database
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    String userId = user.getUid();
+                                    if (user != null) {
+                                        String userId = user.getUid();
 
-                                    // Create user object to store in the database
-                                    User userDetails = new User(fullName, email, phone, address,password);
+                                        // Create user object (without storing password)
+                                        User userDetails = new User(fullName, email, phone, address);
 
-                                    // Add user to the 'Users' node in Realtime Database
-                                    mDatabase.child(userId).setValue(userDetails)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Toast.makeText(Register.this, "Register Successful", Toast.LENGTH_LONG).show();
-                                                        Intent i = new Intent(getApplicationContext(), Login.class);
-                                                        startActivity(i);
-                                                        finish();
-                                                    } else {
-                                                        Toast.makeText(Register.this, "Failed to add user details to database.", Toast.LENGTH_SHORT).show();
+                                        // Add user to the 'Users' node in Realtime Database
+                                        mDatabase.child(userId).setValue(userDetails)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(Register.this, "Register Successful", Toast.LENGTH_LONG).show();
+                                                            Intent i = new Intent(getApplicationContext(), Login.class);
+                                                            startActivity(i);
+                                                            finish();
+                                                        } else {
+                                                            Toast.makeText(Register.this, "Failed to add user details to database.", Toast.LENGTH_SHORT).show();
+                                                        }
                                                     }
-                                                }
-                                            });
-
+                                                });
+                                    }
                                 } else {
-                                    Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    // Provide detailed error messages
+                                    Toast.makeText(Register.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -149,14 +157,12 @@ public class Register extends AppCompatActivity {
         public String email;
         public String phone;
         public String address;
-        public String password;
 
-        public User(String fullName, String email, String phone, String address,String password) {
+        public User(String fullName, String email, String phone, String address) {
             this.fullName = fullName;
             this.email = email;
             this.phone = phone;
             this.address = address;
-            this.password=password;
         }
     }
 }
