@@ -43,7 +43,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_description"
-                android:inputType="text"
+                android:inputType="textMultiLine"
+                android:minLines="10"
+                android:gravity="top"
                 app:layout_constraintTop_toBottomOf="@id/titleEditText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -170,26 +172,23 @@
                 android:id="@+id/chooseImageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="30dp"
                 android:layout_marginTop="16dp"
                 android:drawableEnd="@drawable/baseline_image_24"
                 android:text="@string/choose_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView" />
 
-            <!-- Upload Button -->
             <Button
                 android:id="@+id/uploadButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="30dp"
                 android:layout_marginTop="16dp"
                 android:drawableEnd="@drawable/baseline_cloud_upload_24"
                 android:text="@string/upload"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView" />
-
-            <!-- Progress Bar -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

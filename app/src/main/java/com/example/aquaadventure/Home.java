@@ -41,18 +41,16 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Check if the user is already logged in
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         if (user == null) {
-            // If not logged in, redirect to login page
             Intent i = new Intent(Home.this, Login.class);
             startActivity(i);
             finish();
             return;
         }
 
-        // Initialize RecyclerView and Toolbar
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -67,10 +65,9 @@ public class Home extends AppCompatActivity {
             getSupportActionBar().setTitle("AquaAdventure");
         }
 
-        // Firebase reference
         databaseReference = FirebaseDatabase.getInstance().getReference("Activity");
 
-        // Fetch data from Firebase
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -137,7 +134,6 @@ public class Home extends AppCompatActivity {
             startActivity(i);
             finish();
         } else if (itemId == R.id.user_logout) {
-            // Logout the user
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(getApplicationContext(), Login.class);
             startActivity(i);

@@ -40,4 +40,5 @@
     <string name="account">Account</string>
     <string name="location_allocated">Location Allocated</string>
     <string name="specialization">Specialization</string>
+    <string name="register_instructor">Register Instructor</string>
 </resources>

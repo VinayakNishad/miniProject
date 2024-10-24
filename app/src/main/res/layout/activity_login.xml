@@ -57,9 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:background="#B5B5B5"
         android:id="@+id/login"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp">
+    </Button>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
