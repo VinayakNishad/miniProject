@@ -25,11 +25,12 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
         toolbar=findViewById(R.id.toolBar_back);
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("AquaAdventure");
+            getSupportActionBar().setTitle("Map");
         }
 
     }

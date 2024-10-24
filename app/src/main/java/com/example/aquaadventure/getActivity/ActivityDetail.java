@@ -75,6 +75,14 @@ public class ActivityDetail extends AppCompatActivity {
             Intent bookingIntent = new Intent(ActivityDetail.this, Booking.class);
             bookingIntent.putExtra("activityName", title);
             bookingIntent.putExtra("bookingDateTime", currentDateTime);
+            bookingIntent.putExtra("description",description);
+            bookingIntent.putExtra("duration",duration);
+            bookingIntent.putExtra("start_time",startTime);
+            bookingIntent.putExtra("end_time",endTime);
+            bookingIntent.putExtra("price",price);
+            bookingIntent.putExtra("location",location);
+            bookingIntent.putExtra("date",date);
+
             startActivity(bookingIntent);
         });
     }

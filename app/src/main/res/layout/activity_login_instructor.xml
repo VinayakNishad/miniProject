@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".Instructor.LoginInstructor"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+    android:background="@drawable/dark_blue">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instructor login"
+            android:textColor="#B5B5B5"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:defaultFocusHighlightEnabled="true"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textColorHint="#B5B5B5"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="320dp"
+                android:drawableEnd="@drawable/baseline_email_24"
+                android:inputType="text"
+                android:hint="@string/email"
+                android:layout_height="50dp"
+                android:defaultFocusHighlightEnabled="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:textColorHint="#B5B5B5"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="320dp"
+                android:inputType="number"
+                android:hint="@string/phone"
+                android:drawableEnd="@drawable/baseline_phone_24"
+                android:layout_height="50dp"
+                android:defaultFocusHighlightEnabled="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="350dp"
+            android:textColorHint="#B5B5B5"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="320dp"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:drawableEnd="@drawable/baseline_password_24"
+                android:layout_height="50dp"
+                android:defaultFocusHighlightEnabled="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pgbar"
+            android:visibility="gone" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:padding="10dp"
+            android:background="#B5B5B5"
+            android:id="@+id/login"
+            android:layout_margin="20dp"
+            android:defaultFocusHighlightEnabled="true"/>
+
+    </LinearLayout>

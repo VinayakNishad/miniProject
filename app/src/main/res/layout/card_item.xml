@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="12dp"
-    tools:context=".Admin.InsertActivity.CardItem">
+    tools:context=".Admin.InsertActivity.ActivityItem">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -23,17 +23,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="#91AABD"
             android:gravity="center_horizontal">
 
             <!-- Title -->
             <TextView
                 android:id="@+id/card_title"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
                 android:text="Activity Title"
-                android:textColor="@color/darkgray"
+                android:textColor="#2F4659"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -42,11 +44,10 @@
                 android:id="@+id/card_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/ic_rounded_corner_24"
+                android:background="@drawable/baseline_image_24"
                 android:contentDescription="@string/image"
                 android:scaleType="centerCrop"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 

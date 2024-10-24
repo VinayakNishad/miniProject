@@ -1,25 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Activity Name -->
-    <TextView
-        android:id="@+id/activity_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingTop="16dp" />
 
-    <!-- Booking Date & Time -->
-    <TextView
-        android:id="@+id/booking_date_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:paddingTop="8dp" />
-</LinearLayout>
+    <!-- Use ConstraintLayout as the single child of ScrollView -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- Activity Name -->
+        <TextView
+            android:id="@+id/activity_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:paddingTop="16dp"
+            android:text="Activity name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Booking Date & Time -->
+        <TextView
+            android:id="@+id/booking_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:text="Date and Time"
+            app:layout_constraintTop_toBottomOf="@id/activity_name"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/booking_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Booking ID"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/booking_date_time"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- User Details Section -->
+        <TextView
+            android:id="@+id/section_user_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:text="Your Details"
+            app:layout_constraintTop_toBottomOf="@id/booking_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- User Details -->
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Full Name"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/section_user_details"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/user_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Phone Number"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Address"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/user_phone"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Email"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/user_address"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Activity Details Section -->
+        <TextView
+            android:id="@+id/section_activity_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="16dp"
+            android:text="Activity Details"
+            app:layout_constraintTop_toBottomOf="@id/user_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Activity Details -->
+        <TextView
+            android:id="@+id/descriptionEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Activity Description"
+            android:textColor="@color/black"
+            android:textAlignment="textStart"
+            app:layout_constraintTop_toBottomOf="@id/section_activity_details"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/activity_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Activity Location"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/descriptionEditText"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/activity_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Activity Date"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/activity_location"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/activity_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:text="Price"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/activity_date"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Activity Time Details -->
+        <TextView
+            android:id="@+id/activity_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:text="Activity Start Time"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/activity_price"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/activity_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:text="Activity End Time"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/activity_price"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/activity_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:text="Activity Duration"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/activity_start_time"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Payment Button -->
+        <Button
+            android:id="@+id/payment_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Proceed to Payment"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/activity_duration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

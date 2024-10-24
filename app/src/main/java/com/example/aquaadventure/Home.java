@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aquaadventure.Admin.AdminLogin;
 import com.example.aquaadventure.getActivity.Activity;
-import com.example.aquaadventure.Admin.InsertActivity.CardItem;
+import com.example.aquaadventure.Admin.InsertActivity.ActivityItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +33,7 @@ public class Home extends AppCompatActivity {
     Toolbar toolbar;
     private RecyclerView recyclerView;
     private Activity adapter;
-    private List<CardItem> cardItemList;
+    private List<ActivityItem> activityItemList;
     private DatabaseReference databaseReference;
 
     @Override
@@ -56,8 +56,8 @@ public class Home extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        cardItemList = new ArrayList<>();
-        adapter = new Activity(this, cardItemList);
+        activityItemList = new ArrayList<>();
+        adapter = new Activity(this, activityItemList);
         recyclerView.setAdapter(adapter);
 
         toolbar = findViewById(R.id.toolBar);
@@ -74,12 +74,12 @@ public class Home extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                cardItemList.clear();
+                activityItemList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    CardItem cardItem = dataSnapshot.getValue(CardItem.class);
-                    if (cardItem != null) {
-                        cardItemList.add(cardItem);
-                        Log.d("FirebaseData", "Item: " + cardItem.getTitle());
+                    ActivityItem activityItem = dataSnapshot.getValue(ActivityItem.class);
+                    if (activityItem != null) {
+                        activityItemList.add(activityItem);
+                        Log.d("FirebaseData", "Item: " + activityItem.getTitle());
                     }
                 }
                 adapter.notifyDataSetChanged();

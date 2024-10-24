@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.aquaadventure.Admin.InsertActivity.CardItem;
+import com.example.aquaadventure.Admin.InsertActivity.ActivityItem;
 import com.example.aquaadventure.R;
 
 import java.util.List;
@@ -22,12 +22,12 @@ import java.util.List;
 public class Activity extends RecyclerView.Adapter<Activity.CardViewHolder> {
 
     private Context context;
-    private List<CardItem> cardItemList;
+    private List<ActivityItem> activityItemList;
 
-    // Constructor to initialize context and cardItemList
-    public Activity(Context context, List<CardItem> cardItemList) {
+    // Constructor to initialize context and activityItemList
+    public Activity(Context context, List<ActivityItem> activityItemList) {
         this.context = context;
-        this.cardItemList = cardItemList;
+        this.activityItemList = activityItemList;
     }
 
     @NonNull
@@ -41,7 +41,7 @@ public class Activity extends RecyclerView.Adapter<Activity.CardViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         // Get the current card item
-        CardItem currentItem = cardItemList.get(position);
+        ActivityItem currentItem = activityItemList.get(position);
 
         // Bind data to the ViewHolder
         holder.titleTextView.setText(currentItem.getTitle());
@@ -73,7 +73,7 @@ public class Activity extends RecyclerView.Adapter<Activity.CardViewHolder> {
 
     @Override
     public int getItemCount() {
-        return cardItemList.size(); // Return the size of the list
+        return activityItemList.size(); // Return the size of the list
     }
 
     // ViewHolder class to hold references to the views inside the card

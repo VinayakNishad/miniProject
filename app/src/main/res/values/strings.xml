@@ -38,4 +38,6 @@
     <string name="image">Image</string>
     <string name="title">Title</string>
     <string name="account">Account</string>
+    <string name="location_allocated">Location Allocated</string>
+    <string name="specialization">Specialization</string>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aquaadventure.Home;
 import com.example.aquaadventure.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,7 +21,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.util.UUID;
 
-public class InsertImage extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -90,16 +91,7 @@ public class InsertImage extends AppCompatActivity {
             final String endTime = endTimeEditText.getText().toString().trim();
             final String duration = durationEditText.getText().toString().trim();
             final String date = dateEditText.getText().toString().trim();
-
-            double price;
-            try {
-                price = Double.parseDouble(priceEditText.getText().toString().trim());
-            } catch (NumberFormatException e) {
-                Toast.makeText(InsertImage.this, "Invalid price", Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);
-                return;
-            }
-
+            final String price = priceEditText.getText().toString().trim();
             final String imageId = UUID.randomUUID().toString();
 
             StorageReference fileReference = storageReference.child("activityImage/" + imageId + ".jpg");
@@ -109,27 +101,30 @@ public class InsertImage extends AppCompatActivity {
                 fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
                     String imageUrl = uri.toString();
 
-                    // Create CardItem object
-                    CardItem cardItem = new CardItem(title, imageUrl, description, location, price, date, startTime, endTime, duration);
+                    // Create ActivityItem object
+                    ActivityItem activityItem = new ActivityItem(title, imageUrl, description, location, price, date, startTime, endTime, duration);
 
                     // Store data in Realtime Database
-                    databaseReference.child(imageId).setValue(cardItem).addOnCompleteListener(task -> {
+                    databaseReference.child(imageId).setValue(activityItem).addOnCompleteListener(task -> {
                         progressBar.setVisibility(View.GONE); // <-- Move here for success
                         if (task.isSuccessful()) {
-                            Toast.makeText(InsertImage.this, "Upload successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
                             clearFields();
+                            Intent i = new Intent(getApplicationContext(), Home.class);
+                            startActivity(i);
+                            finish();
                         } else {
-                            Toast.makeText(InsertImage.this, "Failed to upload data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddActivity.this, "Failed to upload data", Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 }).addOnFailureListener(e -> {
                     progressBar.setVisibility(View.GONE); // <-- Ensure it's set back
-                    Toast.makeText(InsertImage.this, "Failed to get image URL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddActivity.this, "Failed to get image URL", Toast.LENGTH_SHORT).show();
                 });
             }).addOnFailureListener(e -> {
                 progressBar.setVisibility(View.GONE); // <-- Ensure it's set back
-                Toast.makeText(InsertImage.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
             });
 
         } else {

@@ -5,12 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".Home"
+    android:background="#CDCDCD">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
+            android:background="#5381A2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolBar">
@@ -34,13 +36,13 @@
     </FrameLayout>
 
 
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:animateLayoutChanges="true"
+        android:background="#5381A2"
         app:menu="@menu/nav_item" />
 
 

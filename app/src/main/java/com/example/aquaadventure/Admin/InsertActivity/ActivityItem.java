@@ -1,14 +1,11 @@
 package com.example.aquaadventure.Admin.InsertActivity;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
-public class CardItem {
+public class ActivityItem {
     private String imageUrl;
     private String title;
     private String description;
     private String location;
-    private double price;
+    private String price;
     private String date;
     private String startTime;
     private String endTime;
@@ -30,7 +27,7 @@ public class CardItem {
         return location;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -51,10 +48,10 @@ public class CardItem {
     }
 
     // Constructors
-    public CardItem() {
+    public ActivityItem() {
     }
 
-    public CardItem(String title, String imageUrl, String description, String location, double price, String date, String startTime, String endTime, String duration) {
+    public ActivityItem(String title, String imageUrl, String description, String location, String price, String date, String startTime, String endTime, String duration) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.description = description;

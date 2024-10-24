@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aquaadventure.Account;
+import com.example.aquaadventure.Admin.InsertActivity.AddActivity;
 import com.example.aquaadventure.R;
 
 public class AdminLogin extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class AdminLogin extends AppCompatActivity {
                 String check = "vn5543@#";
                 String login = uniqueId.getText().toString();
                 if(check.equals(login)){
-                    Intent i = new Intent(getApplicationContext(), Account.class);
+                    Intent i = new Intent(getApplicationContext(), AddActivity.class);
                     startActivity(i);
                     finish();
                 }

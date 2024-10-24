@@ -18,46 +18,55 @@
         android:theme="@style/BackButtonActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".getActivity.ActivityDetail"
-            android:exported="false"/>
+            android:name=".CustomerBook"
+            android:exported="false" />
+
+
         <activity
-            android:name=".Booking"
+            android:name=".Admin.AddInstructor"
+            android:exported="false"/>
+
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>        </activity>
+        <activity
+            android:name=".getActivity.ActivityDetail"
             android:exported="false" />
         <activity
-            android:name=".Admin.InsertActivity.InsertImage"
+            android:name=".Booking"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Admin.InsertActivity.AddActivity"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminLogin"
             android:exported="false" />
         <activity
             android:name=".Map"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Account"
             android:exported="false" />
         <activity
             android:name=".Register"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" />
+        <activity android:name=".Instructor.LoginInstructor"
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Home"
             android:exported="false"
-            android:theme="@style/MyThemeNoActionBar">
-
-
-        </activity>
+            android:theme="@style/MyThemeNoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

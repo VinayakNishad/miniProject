@@ -7,38 +7,46 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="@drawable/dark_blue">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:textAlignment="center"
+        android:textColor="#B5B5B5"
+        android:gravity="center"
         android:textSize="32sp"
         android:textStyle="bold"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:textColorHint="#B5B5B5"
         android:layout_gravity="center">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="320dp"
-            android:hint="@string/email"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            android:textColor="@color/white"
+            android:drawableEnd="@drawable/baseline_email_24"
+            android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:textColorHint="#B5B5B5"
         android:layout_gravity="center">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="320dp"
             android:inputType="textPassword"
+            android:textColor="@color/white"
             android:hint="@string/password"
-            android:layout_height="wrap_content" />
+            android:drawableEnd="@drawable/baseline_password_24"
+            android:layout_height="50dp" />
     </com.google.android.material.textfield.TextInputLayout>
     <ProgressBar
         android:layout_width="wrap_content"
@@ -49,16 +57,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:paddingEnd="100dp"
-        android:paddingStart="100dp"
-        android:paddingBottom="14dp"
-        android:paddingTop="14dp"
+        android:background="#B5B5B5"
         android:id="@+id/login"
         android:layout_margin="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/navRegister"
+        android:textColor="@color/white"
         android:text="@string/navRegister"
         android:gravity="center"
         android:textSize="14sp"/>
