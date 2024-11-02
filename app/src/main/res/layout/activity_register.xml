@@ -8,15 +8,17 @@
     android:orientation="vertical"
     tools:context=".Register"
     android:gravity="center"
-    android:background="@drawable/dark_blue">
+    android:background="@drawable/reg">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:text="@string/register"
-        android:textColor="#B5B5B5"
         android:textAlignment="center"
-        android:textSize="32sp"/>
+        android:textColor="#3F51B5"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -27,6 +29,8 @@
             android:id="@+id/fullname"
             android:layout_width="320dp"
             android:inputType="text"
+            android:background="@drawable/txt_inp_bckgd"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:hint="@string/full_name"
             android:layout_height="50dp" />
@@ -41,6 +45,8 @@
             android:id="@+id/phone"
             android:layout_width="320dp"
             android:inputType="number"
+            android:background="@drawable/txt_inp_bckgd"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:hint="@string/phone"
             android:layout_height="50dp" />
@@ -55,6 +61,8 @@
             android:id="@+id/email"
             android:layout_width="320dp"
             android:hint="@string/email"
+            android:background="@drawable/txt_inp_bckgd"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:layout_height="50dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,6 +76,8 @@
             android:id="@+id/address"
             android:layout_width="320dp"
             android:inputType="text"
+            android:background="@drawable/txt_inp_bckgd"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:hint="@string/full_address"
             android:layout_height="50dp" />
@@ -81,6 +91,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="320dp"
+            android:background="@drawable/txt_inp_bckgd"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:inputType="textPassword"
             android:hint="@string/password"
@@ -97,6 +109,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cpassword"
             android:layout_width="320dp"
+            android:background="@drawable/txt_inp_bckgd"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:inputType="textPassword"
             android:hint="@string/confirm_password"
@@ -113,6 +127,9 @@
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:focusable="true"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:background="@drawable/btn_rounded_corner"
 
         android:id="@+id/register"
         android:layout_margin="10dp"/>

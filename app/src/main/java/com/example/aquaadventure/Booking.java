@@ -2,6 +2,7 @@ package com.example.aquaadventure;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aquaadventure.Instructor.BookingModel;
+import com.example.aquaadventure.getActivity.ActivityDetail;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +29,7 @@ public class Booking extends AppCompatActivity {
     private TextView booking_ID, descriptionTextView, locationTextView, priceTextView, dateTextView, startTimeTextView, endTimeTextView, durationTextView;
     private TextView userNameTextView, userPhoneTextView, userAddressTextView, userEmailTextView;
     private Button payment;
+    FloatingActionButton btn_back;
 
     // Firebase database reference
     private DatabaseReference userRef;
@@ -40,6 +44,13 @@ public class Booking extends AppCompatActivity {
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Booking.this, ActivityDetail.class);
+                startActivity(i);
+            }
+        });
 
         // Initialize views
         activityNameTextView = findViewById(R.id.activity_name);

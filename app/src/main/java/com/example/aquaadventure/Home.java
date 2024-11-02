@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aquaadventure.Admin.AdminLogin;
 import com.example.aquaadventure.getActivity.Activity;
 import com.example.aquaadventure.Admin.InsertActivity.ActivityItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -62,8 +62,25 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setTitle("AquaAdventure");
+            getSupportActionBar().setDisplayShowTitleEnabled(false);  // Hide the title
+
+            // Create an ImageView programmatically
+            ImageView logo = new ImageView(this);
+            logo.setImageResource(R.drawable.applogorm);  // Set your icon here
+
+            // Adjust the size of the ImageView (width and height in pixels)
+            int sizeInDp = 24; // Desired icon size in dp
+            float scale = getResources().getDisplayMetrics().density;
+            int sizeInPx = (int) (sizeInDp * scale + 0.5f);  // Convert dp to px
+
+            // Set width and height to 24dp
+            Toolbar.LayoutParams layoutParams = new Toolbar.LayoutParams(sizeInPx, sizeInPx);
+            logo.setLayoutParams(layoutParams);
+
+            // Add the ImageView to the toolbar
+            toolbar.addView(logo);
         }
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Activity");
 
@@ -128,12 +145,8 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), Map.class);
             startActivity(i);
             finish();
-        } else if (itemId == R.id.adminlogin) {
-            Toast.makeText(this, "Admin login", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getApplicationContext(), AdminLogin.class);
-            startActivity(i);
-            finish();
-        } else if (itemId == R.id.user_logout) {
+        }
+        else if (itemId == R.id.user_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(getApplicationContext(), Login.class);
             startActivity(i);

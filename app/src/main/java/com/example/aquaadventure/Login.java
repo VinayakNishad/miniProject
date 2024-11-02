@@ -12,8 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aquaadventure.Admin.InsertActivity.AddActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,7 @@ public class Login extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar pgbar;
     TextView tv_navReg;
+    private FloatingActionButton btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class Login extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        btn_back = findViewById(R.id.backButton);
+
 
         // Link XML views
         et_email = findViewById(R.id.email);
@@ -39,6 +44,13 @@ public class Login extends AppCompatActivity {
         btn_log = findViewById(R.id.login);
         pgbar = findViewById(R.id.pgbar);
         tv_navReg = findViewById(R.id.navRegister);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(Login.this, CommonInterface.class);
+                startActivity(i);
+            }
+        });
 
         // Navigation to Register Activity
         tv_navReg.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +93,18 @@ public class Login extends AppCompatActivity {
 
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(getApplicationContext(), Home.class);
-                                    startActivity(i);
-                                    finish();
+
+                                    // Check for admin credentials
+                                    if (email.equals("vn07244@gmail.com") && password.equals("vn2468@#")) {
+                                        // Navigate to Admin screen
+                                        Intent i = new Intent(getApplicationContext(), AdminHome.class);
+                                        startActivity(i);
+                                        finish();
+                                    } else {
+                                        // Navigate to Home screen for regular users
+                                        Intent i = new Intent(getApplicationContext(), Home.class);
+                                        startActivity(i);
+                                    }
                                 } else {
                                     // Display detailed error message
                                     String errorMessage = task.getException() != null ? task.getException().getMessage() : "Authentication failed.";

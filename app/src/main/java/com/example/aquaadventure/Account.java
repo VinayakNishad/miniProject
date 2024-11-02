@@ -1,12 +1,18 @@
 package com.example.aquaadventure;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,13 +22,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class Account extends AppCompatActivity {
+    private static final int REQUEST_CODE_GALLERY = 1001;
     FirebaseAuth auth;
-    EditText fullname, address, phone, email;
+    EditText fullname, address, phone;
+    TextView email;
     FirebaseUser fuser;
     DatabaseReference mDatabase;
-    TextView tv_account;
+    StorageReference storageReference;
+    ImageView avatarImageView;
+    Uri avatarUri;
     Button btn_update;
 
     @Override
@@ -30,85 +43,101 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth, Database, and Storage
         auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
+        fuser = auth.getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference("Avatars").child(fuser.getUid());
 
         // Initialize UI elements
         fullname = findViewById(R.id.fullname);
-        email = findViewById(R.id.email);
+        email = findViewById(R.id.email_display);
         phone = findViewById(R.id.phone);
         address = findViewById(R.id.address);
-        tv_account = findViewById(R.id.tv_account);
+        avatarImageView = findViewById(R.id.avatarImageView);
         btn_update = findViewById(R.id.update);
 
-        // Get current user from authentication
-        fuser = auth.getCurrentUser();
-        if (fuser == null) {
-            finish(); // Go back to login if no user is logged in
-        } else {
-            // Get user ID and retrieve user details from Realtime Database
-            String userId = fuser.getUid();
-            mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        // Initialize Firebase Database reference
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
-            // Add a listener to retrieve data from the database
-            mDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        // Retrieve user data using the User class
-                        User user = dataSnapshot.getValue(User.class);
+        // Load user data
+        loadUserData();
 
-                        // Display the fetched data
-                        if (user != null) {
-                            fullname.setText(user.fullName);
-                            phone.setText(user.phone);
-                            address.setText(user.address);
-                            email.setText(user.email);  // Email is not editable
-                        }
+        // Set click listener for avatar to open gallery
+        avatarImageView.setOnClickListener(v -> openGallery());
+
+        // Update button listener to save new user details
+        btn_update.setOnClickListener(v -> updateUserDetails());
+    }
+
+    private void loadUserData() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        fullname.setText(user.fullName);
+                        phone.setText(user.phone);
+                        address.setText(user.address);
+                        email.setText(user.email);
                     }
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Handle possible errors
-                    tv_account.setText("Failed to load user data: " + databaseError.getMessage());
-                }
-            });
-        }
-
-        // Update button listener
-        btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String newFullName = fullname.getText().toString();
-                String newPhone = phone.getText().toString();
-                String newAddress = address.getText().toString();
-
-                if (!newFullName.isEmpty() && !newPhone.isEmpty() && !newAddress.isEmpty()) {
-                    // Update the Firebase Realtime Database
-                    mDatabase.child("fullName").setValue(newFullName);
-                    mDatabase.child("phone").setValue(newPhone);
-                    mDatabase.child("address").setValue(newAddress);
-
-                    Toast.makeText(Account.this, "Details updated successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Account.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-                }
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(Account.this, "Failed to load user data", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    // Define a User class to map to the database
-    public static class User {
-        public String fullName;
-        public String email;
-        public String phone;
-        public String address;
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_CODE_GALLERY);
+    }
 
-        public User() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK && data != null) {
+            avatarUri = data.getData();
+            avatarImageView.setImageURI(avatarUri);
+            uploadAvatar();
         }
+    }
+
+    private void uploadAvatar() {
+        if (avatarUri != null) {
+            storageReference.putFile(avatarUri).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(this, "Avatar uploaded successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Avatar upload failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void updateUserDetails() {
+        String newFullName = fullname.getText().toString();
+        String newPhone = phone.getText().toString();
+        String newAddress = address.getText().toString();
+
+        if (!newFullName.isEmpty() && !newPhone.isEmpty() && !newAddress.isEmpty()) {
+            mDatabase.child("fullName").setValue(newFullName);
+            mDatabase.child("phone").setValue(newPhone);
+            mDatabase.child("address").setValue(newAddress);
+            Toast.makeText(Account.this, "Details updated successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(Account.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static class User {
+        public String fullName, email, phone, address;
+
+        public User() { /* Default constructor for Firebase */ }
 
         public User(String fullName, String email, String phone, String address) {
             this.fullName = fullName;

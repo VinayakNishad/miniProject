@@ -15,6 +15,7 @@ public class BookingModel {
     private String userAddress;
     private String userEmail;
     private String bookingDateTime;
+    private int status;
 
     // Empty constructor for Firebase
     public BookingModel() {}
@@ -65,6 +66,14 @@ public class BookingModel {
 
     public String getStartTime() { return startTime; }
     public void setStartTime(String startTime) { this.startTime = startTime; }
+    // Add a getter and setter for the status attribute
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getBookingId() {
         return bookingId;
@@ -76,6 +85,9 @@ public class BookingModel {
 
     public String getBookingDateTime() {
         return bookingDateTime;
+    }
+    public String toString() {
+        return activityName + " - " + userName; // Customize the string as needed
     }
 
     public void setBookingDateTime(String bookingDateTime) {

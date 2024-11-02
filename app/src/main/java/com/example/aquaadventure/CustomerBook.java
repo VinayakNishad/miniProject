@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,7 +58,21 @@ public class CustomerBook extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull BookingViewHolder holder, int position, @NonNull BookingModel model) {
                         holder.setBookingDetails(model);
+
+                        // Get the booking ID or key for Firebase update reference
+                        String bookingKey = getRef(position).getKey();
+
+                        // Set Accept button functionality
+                        holder.acceptButton.setOnClickListener(v -> {
+                            bookingRef.child(bookingKey).child("status").setValue(1);
+                        });
+
+                        // Set Reject button functionality
+                        holder.rejectButton.setOnClickListener(v -> {
+                            bookingRef.child(bookingKey).child("status").setValue(0);
+                        });
                     }
+
 
                     @Override
                     public BookingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,10 +88,15 @@ public class CustomerBook extends AppCompatActivity {
     public static class BookingViewHolder extends RecyclerView.ViewHolder {
 
         View mView;
+        Button acceptButton, rejectButton;
 
         public BookingViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
+
+            // Initialize the Accept and Reject buttons
+            acceptButton = mView.findViewById(R.id.btn_accept);
+            rejectButton = mView.findViewById(R.id.btn_reject);
         }
 
         public void setBookingDetails(BookingModel booking) {

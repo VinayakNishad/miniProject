@@ -95,11 +95,12 @@ public class AddInstructor extends AppCompatActivity {
                         // Hide progress bar
                         progressBar.setVisibility(View.GONE);
 
+                        // After successful registration
                         if (task.isSuccessful()) {
                             Toast.makeText(AddInstructor.this, "Instructor Registered Successfully", Toast.LENGTH_SHORT).show();
                             clearFields();
-                            Intent i = new Intent(getApplicationContext(), LoginInstructor.class);
-                            startActivity(i);
+                            Intent intent = new Intent(AddInstructor.this, ListOfInstructor.class);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(AddInstructor.this, "Failed to register instructor", Toast.LENGTH_SHORT).show();
                         }

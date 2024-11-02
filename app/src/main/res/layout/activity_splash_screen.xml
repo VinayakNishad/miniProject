@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
     android:gravity="center"
-    android:background="#042B4B">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/app_name"
-        android:text="AquaAdventure"
-        android:fontFamily="casual"
-        android:textSize="42sp"
-        android:textStyle="bold"
-        android:shadowColor="@color/black"
-        android:textColor="@color/white"/>
+    android:background="@drawable/b1">
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

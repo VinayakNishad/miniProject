@@ -8,13 +8,26 @@
     tools:context=".Account"
     android:orientation="vertical"
     android:gravity="center">
+
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="194dp"
+        android:layout_height="189dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="profile"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_account_circle_24"
+        app:circleCrop="true" /> <!-- Make circular with `circleCrop` or use shape drawable -->
+
+
+    <!-- Email TextView -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/email_display"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/account"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        android:id="@+id/tv_account"/>
+        android:text="@string/email"
+        android:textSize="16sp" />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"
@@ -42,18 +55,7 @@
             android:hint="@string/phone"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_height="wrap_content"
-        android:layout_width="350dp"
-        android:padding="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
-            android:layout_width="320dp"
-            android:hint="@string/email"
-            app:textInputLayoutFocusedRectEnabled="true"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="350dp"
         android:layout_height="wrap_content"

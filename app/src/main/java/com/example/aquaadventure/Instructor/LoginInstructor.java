@@ -10,8 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aquaadventure.Admin.AddInstructor;
+import com.example.aquaadventure.CommonInterface;
 import com.example.aquaadventure.CustomerBook;
 import com.example.aquaadventure.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,10 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
+
 public class LoginInstructor extends AppCompatActivity {
 
     private TextInputEditText emailEditText, phoneEditText, passwordEditText;
     private Button loginButton;
+    private FloatingActionButton backButton;
     private ProgressBar progressBar;
     private DatabaseReference databaseReference;
 
@@ -34,6 +38,7 @@ public class LoginInstructor extends AppCompatActivity {
 
         // Initialize Firebase Database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("Instructor");
+        backButton=findViewById(R.id.backButton);
 
         // Initialize UI elements
         emailEditText = findViewById(R.id.email);
@@ -41,6 +46,13 @@ public class LoginInstructor extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login);
         progressBar = findViewById(R.id.pgbar);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginInstructor.this, CommonInterface.class);
+                startActivity(i);
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

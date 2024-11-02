@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,14 +19,38 @@
         android:theme="@style/BackButtonActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".CommonInterface"
+            android:exported="false" />
+        <activity
+            android:name=".Payment"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Instructor.ListOfActivityAccepted"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.ListOfInstructor"
+            android:exported="false" />
+        <activity
+            android:name=".AdminHome"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.ActivityStatus"
+            android:exported="false" />
+        <activity
+            android:name=".About.About3"
+            android:exported="false" />
+        <activity
+            android:name=".About.About2"
+            android:exported="false" />
+        <activity
+            android:name=".About.About1"
+            android:exported="false" />
+        <activity
             android:name=".CustomerBook"
             android:exported="false" />
-
-
         <activity
             android:name=".Admin.AddInstructor"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true">
@@ -33,19 +58,16 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>        </activity>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".getActivity.ActivityDetail"
             android:exported="false" />
         <activity
             android:name=".Booking"
-            android:exported="false"/>
-
-        <activity
-            android:name=".Admin.InsertActivity.AddActivity"
             android:exported="false" />
         <activity
-            android:name=".Admin.AdminLogin"
+            android:name=".Admin.InsertActivity.AddActivity"
             android:exported="false" />
         <activity
             android:name=".Map"
@@ -59,10 +81,9 @@
         <activity
             android:name=".Register"
             android:exported="false" />
-        <activity android:name=".Instructor.LoginInstructor"
-            android:exported="false">
-
-        </activity>
+        <activity
+            android:name=".Instructor.LoginInstructor"
+            android:exported="false" />
         <activity
             android:name=".Home"
             android:exported="false"

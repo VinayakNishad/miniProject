@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
-            android:background="#5381A2"
+            android:background="#043B85"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolBar">
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:animateLayoutChanges="true"
-        android:background="#5381A2"
+        android:background="#043B85"
         app:menu="@menu/nav_item" />
 
 

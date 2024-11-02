@@ -11,19 +11,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:backgroundTint="#043B85"
+            android:contentDescription="back"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:tint="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-        <!-- Activity Name -->
         <TextView
             android:id="@+id/activity_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:paddingTop="16dp"
             android:text="Activity name"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="8dp"/>
@@ -212,8 +223,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Proceed to Payment"
-            android:textColor="@android:color/black"
-            android:backgroundTint="@color/blue"
+
+            android:textColor="@android:color/white"
+            android:background="@drawable/txt_inp_bckgd"
             app:layout_constraintTop_toBottomOf="@id/activity_duration"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.aquaadventure.Booking;
+import com.example.aquaadventure.Home;
 import com.example.aquaadventure.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -19,6 +22,7 @@ import java.util.Locale;
 public class ActivityDetail extends AppCompatActivity {
 
     private ImageView cardImageView;
+    FloatingActionButton btn_back;
     private TextView titleTextView, descriptionTextView, locationTextView, priceTextView, dateTextView, startTimeTextView, endTimeTextView, durationTextView;
     private Button bookButton;
 
@@ -26,6 +30,14 @@ public class ActivityDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_detail);
+        btn_back=findViewById(R.id.backButton);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityDetail.this, Home.class);
+                startActivity(i);
+            }
+        });
 
         // Initialize views
         cardImageView = findViewById(R.id.card_image);

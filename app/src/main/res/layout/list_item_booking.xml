@@ -28,24 +28,25 @@
                 android:paddingTop="16dp"
                 android:text="Activity name"
                 android:layout_gravity="center" />
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:padding="8dp"
-                    android:layout_gravity="start"
-                    android:text="Full Name"
-                    android:textColor="@color/black" />
 
-                <TextView
-                    android:id="@+id/user_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:padding="10dp"
-                    android:text="Phone Number"
-                    android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:padding="8dp"
+                android:layout_gravity="start"
+                android:text="Full Name"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:text="Phone Number"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/activity_location"
@@ -64,24 +65,53 @@
                 android:text="Activity Date"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-                <TextView
-                    android:id="@+id/activity_start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="Activity Start Time"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/activity_end_time"
+            <TextView
+                android:id="@+id/activity_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Activity Start Time"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/activity_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:padding="8dp"
+                android:text="Activity End Time"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <!-- Buttons for Completed and Not Completed -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="16dp">
+
+                <Button
+                    android:id="@+id/btn_accept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:padding="8dp"
-                    android:text="Activity End Time"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="#40A043"
+                    android:drawableEnd="@drawable/baseline_check_circle_24"
+                    android:text="Accept"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_reject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/red"
+                    android:drawableEnd="@drawable/baseline_block_24"
+                    android:text="Reject"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
         </LinearLayout>
 
