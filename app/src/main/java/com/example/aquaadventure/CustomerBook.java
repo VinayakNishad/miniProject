@@ -24,8 +24,6 @@ public class CustomerBook extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference bookingRef;
 
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +36,7 @@ public class CustomerBook extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         fetchBookingData();
-        toolbar=findViewById(R.id.toolBar_back);
-        setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Customer Booked");
-        }
+
     }
 
 

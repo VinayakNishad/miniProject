@@ -49,7 +49,7 @@ public class ActivityDetail extends AppCompatActivity {
         startTimeTextView = findViewById(R.id.card_start_time);
         endTimeTextView = findViewById(R.id.card_end_time);
         durationTextView = findViewById(R.id.card_duration);
-        bookButton = findViewById(R.id.book_button);
+        bookButton = findViewById(R.id.book_btn);
 
         // Get data from intent
         String title = getIntent().getStringExtra("title");

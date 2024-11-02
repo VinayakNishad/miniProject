@@ -129,7 +129,7 @@
 
         <!-- Book Button -->
         <Button
-            android:id="@+id/book_button"
+            android:id="@+id/book_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_duration"

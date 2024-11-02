@@ -30,7 +30,6 @@ public class ListOfActivityAccepted extends AppCompatActivity {
         listViewAccepted = findViewById(R.id.listViewAccepted);
         bookingRef = FirebaseDatabase.getInstance().getReference().child("Booking");
         acceptedBookings = new ArrayList<>();
-
         fetchAcceptedBookings();
     }
 

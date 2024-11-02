@@ -87,7 +87,7 @@ public class BookingModel {
         return bookingDateTime;
     }
     public String toString() {
-        return activityName + " - " + userName; // Customize the string as needed
+        return activityName + " had booked by " + userName + " at " + bookingDateTime + " with phone number " + userPhone + " and address " + userAddress + "." ; // Customize the string as needed
     }
 
     public void setBookingDateTime(String bookingDateTime) {

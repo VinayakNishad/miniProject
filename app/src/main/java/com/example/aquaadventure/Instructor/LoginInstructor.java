@@ -90,7 +90,7 @@ public class LoginInstructor extends AppCompatActivity {
                                 // Check if the phone and password match
                                 if (dbPhone.equals(phone) && dbPassword.equals(password)) {
                                     Toast.makeText(LoginInstructor.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(LoginInstructor.this, CustomerBook.class);
+                                    Intent i = new Intent(LoginInstructor.this, ListOfActivityAccepted.class);
                                     startActivity(i);
                                 } else {
                                     Toast.makeText(LoginInstructor.this, "Incorrect phone number or password", Toast.LENGTH_SHORT).show();
