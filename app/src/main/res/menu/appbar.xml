@@ -11,4 +11,7 @@
         android:icon="@drawable/baseline_login_24"
         android:title="@string/logout"
         app:showAsAction="collapseActionView"/>
+    <item android:id="@+id/menu_about_app"
+        android:title="About app"
+        app:showAsAction="collapseActionView"/>
 </menu>

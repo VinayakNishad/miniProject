@@ -104,6 +104,7 @@ public class Login extends AppCompatActivity {
                                         // Navigate to Home screen for regular users
                                         Intent i = new Intent(getApplicationContext(), Home.class);
                                         startActivity(i);
+                                        finish();
                                     }
                                 } else {
                                     // Display detailed error message

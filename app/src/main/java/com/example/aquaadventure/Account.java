@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,7 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,11 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class Account extends AppCompatActivity {
     private static final int REQUEST_CODE_GALLERY = 1001;
     FirebaseAuth auth;
+    Toolbar toolbar;
     EditText fullname, address, phone;
     TextView email;
     FirebaseUser fuser;
@@ -67,6 +72,40 @@ public class Account extends AppCompatActivity {
 
         // Update button listener to save new user details
         btn_update.setOnClickListener(v -> updateUserDetails());
+
+        // Set up Toolbar
+        toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setTitle("Account");
+        }
+
+        // Set up BottomNavigationView and highlight the Account tab
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_account); // Highlight the Account tab
+
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_account) {
+                    Toast.makeText(Account.this, "Account", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (item.getItemId() == R.id.nav_book) {
+                    Toast.makeText(Account.this, "Book", Toast.LENGTH_SHORT).show();
+                    Intent bookIntent = new Intent(Account.this, BookByUser.class);
+                    startActivity(bookIntent);
+                    return true;
+                } else if (item.getItemId() == R.id.nav_home) {
+                    Toast.makeText(Account.this, "Home", Toast.LENGTH_SHORT).show();
+                    Intent accountIntent = new Intent(Account.this, Home.class);
+                    startActivity(accountIntent);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 
     private void loadUserData() {
@@ -80,6 +119,11 @@ public class Account extends AppCompatActivity {
                         phone.setText(user.phone);
                         address.setText(user.address);
                         email.setText(user.email);
+
+                        // Load avatar URL if it exists
+                        if (user.avatarUrl != null) {
+                            Glide.with(Account.this).load(user.avatarUrl).into(avatarImageView);
+                        }
                     }
                 }
             }
@@ -102,7 +146,7 @@ public class Account extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK && data != null) {
             avatarUri = data.getData();
-            avatarImageView.setImageURI(avatarUri);
+            avatarImageView.setImageURI(avatarUri); // Set image in ImageView
             uploadAvatar();
         }
     }
@@ -111,7 +155,19 @@ public class Account extends AppCompatActivity {
         if (avatarUri != null) {
             storageReference.putFile(avatarUri).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(this, "Avatar uploaded successfully", Toast.LENGTH_SHORT).show();
+                    // Get download URL of the uploaded image
+                    storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String downloadUrl = uri.toString();
+                        // Update the avatar ImageView with the uploaded image
+                        Glide.with(Account.this).load(downloadUrl).into(avatarImageView);
+
+                        // Save the download URL in Firebase Database for future use
+                        mDatabase.child("avatarUrl").setValue(downloadUrl);
+
+                        Toast.makeText(this, "Avatar uploaded successfully", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(e ->
+                            Toast.makeText(this, "Failed to get avatar URL", Toast.LENGTH_SHORT).show()
+                    );
                 } else {
                     Toast.makeText(this, "Avatar upload failed", Toast.LENGTH_SHORT).show();
                 }
@@ -135,15 +191,44 @@ public class Account extends AppCompatActivity {
     }
 
     public static class User {
-        public String fullName, email, phone, address;
+        public String fullName, email, phone, address, avatarUrl;
 
         public User() { /* Default constructor for Firebase */ }
 
-        public User(String fullName, String email, String phone, String address) {
+        public User(String fullName, String email, String phone, String address, String avatarUrl) {
             this.fullName = fullName;
             this.email = email;
             this.phone = phone;
             this.address = address;
+            this.avatarUrl = avatarUrl;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.appbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.location) {
+            Toast.makeText(this, "Location", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), Map.class);
+            startActivity(i);
+            finish();
+        }
+        else if (itemId == R.id.user_logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(getApplicationContext(), Login.class);
+            startActivity(i);
+            finish();
+            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

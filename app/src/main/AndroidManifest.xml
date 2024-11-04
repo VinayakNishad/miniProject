@@ -19,11 +19,17 @@
         android:theme="@style/BackButtonActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".AboutMe"
+            android:exported="false" />
+        <activity
+            android:name=".BookByUser"
+            android:exported="false" />
+        <activity
             android:name=".CommonInterface"
             android:exported="false" />
         <activity
             android:name=".Payment"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Instructor.ListOfActivityAccepted"
             android:exported="false" />

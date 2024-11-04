@@ -11,4 +11,7 @@
     <item
         android:id="@+id/menu_add_activity"
         android:title="Add Activity" />
+    <item
+        android:id="@+id/menu_about_app"
+        android:title="About app" />
 </menu>

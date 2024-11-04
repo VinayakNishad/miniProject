@@ -1,82 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Account"
-    android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".Account">
 
-    <ImageView
-        android:id="@+id/avatarImageView"
-        android:layout_width="194dp"
-        android:layout_height="189dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="profile"
-        android:scaleType="centerCrop"
-        android:src="@drawable/baseline_account_circle_24"
-        app:circleCrop="true" /> <!-- Make circular with `circleCrop` or use shape drawable -->
-
-
-    <!-- Email TextView -->
-    <TextView
-        android:id="@+id/email_display"
-        android:layout_width="wrap_content"
+    <!-- AppBarLayout with Toolbar at the top -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email"
-        android:textSize="16sp" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="350dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#043B85"
+            app:title="Account"
+            app:titleTextColor="@android:color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- RelativeLayout for Profile and Form Elements -->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fullname"
-            android:layout_width="320dp"
-            android:inputType="text"
-            app:textInputLayoutFocusedRectEnabled="true"
-            android:hint="@string/full_name"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="194dp"
+            android:layout_height="189dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="profile"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_account_circle_24"
+            app:circleCrop="true" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="350dp"
+        <!-- Email TextView -->
+        <TextView
+            android:id="@+id/email_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avatarImageView"
+            android:layout_centerHorizontal="true"
+            android:text="@string/email"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Full Name TextInputLayout -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fullname_layout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email_display"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                app:textInputLayoutFocusedRectEnabled="true"
+                android:hint="@string/full_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Phone TextInputLayout -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_layout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fullname_layout"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                app:textInputLayoutFocusedRectEnabled="true"
+                android:hint="@string/phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Address TextInputLayout -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/address_layout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_layout"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                app:textInputLayoutFocusedRectEnabled="true"
+                android:hint="@string/full_address" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Update"
+            android:background="@drawable/txt_inp_bckgd"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_alignParentBottom="true"
+        android:animateLayoutChanges="true"
+        android:background="#043B85"
+        android:layout_gravity="bottom"
+        app:menu="@menu/nav_item_account" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone"
-            android:layout_width="320dp"
-            android:inputType="number"
-            app:textInputLayoutFocusedRectEnabled="true"
-            android:hint="@string/phone"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/address"
-            android:layout_width="320dp"
-            android:inputType="text"
-            app:textInputLayoutFocusedRectEnabled="true"
-            android:hint="@string/full_address"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:text="update"
-        android:layout_marginTop="0dp"
-        app:icon="@drawable/baseline_logout_24" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

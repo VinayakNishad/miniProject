@@ -11,9 +11,9 @@ import java.util.List;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
 
-    private List<Booking> bookings;
+    private List<BookingModel> bookings;
 
-    public BookingAdapter(List<Booking> bookings) {
+    public BookingAdapter(List<BookingModel> bookings) {
         this.bookings = bookings;
     }
 
@@ -25,7 +25,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
     @Override
     public void onBindViewHolder(BookingViewHolder holder, int position) {
-        Booking booking = bookings.get(position);
+        BookingModel booking = bookings.get(position);
         holder.activityName.setText(booking.getActivityName());
         holder.bookingDate.setText(booking.getBookingDate());
     }

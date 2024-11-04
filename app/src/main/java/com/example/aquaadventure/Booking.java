@@ -1,6 +1,7 @@
 package com.example.aquaadventure;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,12 +30,15 @@ public class Booking extends AppCompatActivity {
     private TextView booking_ID, descriptionTextView, locationTextView, priceTextView, dateTextView, startTimeTextView, endTimeTextView, durationTextView;
     private TextView userNameTextView, userPhoneTextView, userAddressTextView, userEmailTextView;
     private Button payment;
-    FloatingActionButton btn_back;
+    private FloatingActionButton btn_back;
 
     // Firebase database reference
     private DatabaseReference userRef;
+    private DatabaseReference bookingRef;
     private FirebaseAuth firebaseAuth;
 
+    // Booking ID variable
+    private int bookingId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +48,14 @@ public class Booking extends AppCompatActivity {
         // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Booking.this, ActivityDetail.class);
-                startActivity(i);
-            }
-        });
 
         // Initialize views
+        btn_back = findViewById(R.id.backButton);
+        btn_back.setOnClickListener(v -> {
+            Intent i = new Intent(Booking.this, ActivityDetail.class);
+            startActivity(i);
+        });
+
         activityNameTextView = findViewById(R.id.activity_name);
         bookingDateTimeTextView = findViewById(R.id.booking_date_time);
         booking_ID = findViewById(R.id.booking_id);
@@ -63,22 +66,18 @@ public class Booking extends AppCompatActivity {
         startTimeTextView = findViewById(R.id.activity_start_time);
         endTimeTextView = findViewById(R.id.activity_end_time);
         durationTextView = findViewById(R.id.activity_duration);
-
         userNameTextView = findViewById(R.id.user_name);
         userPhoneTextView = findViewById(R.id.user_phone);
         userAddressTextView = findViewById(R.id.user_address);
         userEmailTextView = findViewById(R.id.user_email);
         payment = findViewById(R.id.payment_button);
 
-        payment.setOnClickListener(v -> {
-            // Save the booking details to Firebase Realtime Database
-            saveBookingDataToFirebase();
-        });
-
-
         // Generate a 4-digit random booking ID
-        int bookingId = new Random().nextInt(9000) + 1000;
+        bookingId = new Random().nextInt(9000) + 1000;
         booking_ID.setText("Booking ID: " + bookingId);
+
+        // Set up payment button listener
+        payment.setOnClickListener(v -> saveBookingDataToFirebase());
 
         // Get data from intent
         String activityName = getIntent().getStringExtra("activityName");
@@ -94,9 +93,9 @@ public class Booking extends AppCompatActivity {
         // Set the activity-related data to views
         activityNameTextView.setText(activityName);
         bookingDateTimeTextView.setText("Booking Date & Time: " + bookingDateTime);
-        dateTextView.setText("Activity date : " + date);
+        dateTextView.setText("Activity date: " + date);
         descriptionTextView.setText(description);
-        locationTextView.setText("Location : " + location);
+        locationTextView.setText("Location: " + location);
         startTimeTextView.setText("Start time: " + startTime);
         endTimeTextView.setText("Ending time: " + endTime);
         priceTextView.setText("Price per person: " + price + " Rupees");
@@ -106,7 +105,7 @@ public class Booking extends AppCompatActivity {
         if (currentUser != null) {
             String userId = currentUser.getUid();
 
-            // Initialize Firebase database reference
+            // Initialize Firebase database reference for user
             userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
 
             // Fetch user details from Firebase
@@ -137,14 +136,12 @@ public class Booking extends AppCompatActivity {
             userNameTextView.setText("User not logged in");
         }
     }
+
     private void saveBookingDataToFirebase() {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
-
-            // Generate a 4-digit random booking ID as an int
-            int bookingId = new Random().nextInt(9000) + 1000;
 
             // Collect booking data
             String activityName = activityNameTextView.getText().toString();
@@ -162,9 +159,9 @@ public class Booking extends AppCompatActivity {
             String userAddress = userAddressTextView.getText().toString();
             String userEmail = userEmailTextView.getText().toString();
 
-            // Create a new booking object with bookingId as int
+            // Create a new booking object
             BookingModel booking = new BookingModel(
-                    bookingId,
+                    bookingId, // Use the generated booking ID
                     activityName,
                     description,
                     location,
@@ -180,21 +177,27 @@ public class Booking extends AppCompatActivity {
                     bookingDateTime
             );
 
-            // Save the booking data to Firebase Realtime Database under "Booking" node
-            DatabaseReference bookingRef = FirebaseDatabase.getInstance().getReference().child("Booking");
-            bookingRef.child(String.valueOf(bookingId)).setValue(booking)  // Set booking with ID as child key
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Booking.this, "Booking saved successfully!", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), CustomerBook.class);
-                            startActivity(i);
-                        } else {
-                            Toast.makeText(Booking.this, "Failed to save booking. Please try again.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            // Save the booking data to Firebase Realtime Database under "Booking" node with bookingId as the key
+            bookingRef = FirebaseDatabase.getInstance().getReference("Booking").child(String.valueOf(bookingId));
+            bookingRef.setValue(booking).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(Booking.this, "Booking saved successfully!", Toast.LENGTH_SHORT).show();
+
+                    // Create an Intent to open the CustomerBook activity
+                    Intent intent = new Intent(getApplicationContext(), CustomerBook.class);
+                    startActivity(intent);
+
+                    // Navigate to the specified URL in a web browser
+                    String url = "https://zerotize.in/pay/omsYv6IR"; // Your URL
+                    Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(webIntent);
+                }
+                else {
+                    Toast.makeText(Booking.this, "Failed to save booking. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

@@ -65,6 +65,10 @@ public class AdminHome extends AppCompatActivity {
             } else if (itemId == R.id.menu_add_activity) {
                 startActivity(new Intent(this, AddActivity.class));
             }
+            else if (itemId == R.id.menu_about_app) {
+                startActivity(new Intent(this, AboutMe.class));
+            }
+
             return true;
         });
 

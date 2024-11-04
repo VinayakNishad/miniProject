@@ -84,7 +84,7 @@ public class ActivityDetail extends AppCompatActivity {
             String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
             // Navigate to booking page
-            Intent bookingIntent = new Intent(ActivityDetail.this, Booking.class);
+            Intent bookingIntent = new Intent(getApplicationContext(), Booking.class);
             bookingIntent.putExtra("activityName", title);
             bookingIntent.putExtra("bookingDateTime", currentDateTime);
             bookingIntent.putExtra("description",description);

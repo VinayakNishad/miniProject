@@ -114,7 +114,7 @@ public class Home extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.nav_book) {
                     Toast.makeText(Home.this, "Book", Toast.LENGTH_SHORT).show();
-                    Intent bookIntent = new Intent(Home.this, Booking.class);
+                    Intent bookIntent = new Intent(Home.this, BookByUser.class);
                     startActivity(bookIntent);
                     return true;
                 } else if (item.getItemId() == R.id.nav_account) {
@@ -152,7 +152,14 @@ public class Home extends AppCompatActivity {
             startActivity(i);
             finish();
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else if (itemId == R.id.menu_about_app) {
+
+            Intent i = new Intent(getApplicationContext(), AboutMe.class);
+            startActivity(i);
+
+            Toast.makeText(this, "About app", Toast.LENGTH_SHORT).show();
+        }else {
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
