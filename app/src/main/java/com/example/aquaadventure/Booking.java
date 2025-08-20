@@ -184,7 +184,7 @@ public class Booking extends AppCompatActivity {
                     Toast.makeText(Booking.this, "Booking saved successfully!", Toast.LENGTH_SHORT).show();
 
                     // Create an Intent to open the CustomerBook activity
-                    Intent intent = new Intent(getApplicationContext(), CustomerBook.class);
+                    Intent intent = new Intent(getApplicationContext(), BookByUser.class);
                     startActivity(intent);
 
                     // Navigate to the specified URL in a web browser

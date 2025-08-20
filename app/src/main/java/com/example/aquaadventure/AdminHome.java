@@ -12,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.aquaadventure.Admin.AddInstructor;
 import com.example.aquaadventure.Admin.InsertActivity.AddActivity;
+import com.example.aquaadventure.Admin.ListOfInstructor;
+import com.example.aquaadventure.getActivity.Activity;
 
 public class AdminHome extends AppCompatActivity {
 
@@ -68,6 +70,16 @@ public class AdminHome extends AppCompatActivity {
             else if (itemId == R.id.menu_about_app) {
                 startActivity(new Intent(this, AboutMe.class));
             }
+            else if (itemId == R.id.menu_view_activity) {
+                startActivity(new Intent(this, Home.class));
+            }
+            else if (itemId == R.id.menu_view_all_instructor) {
+                startActivity(new Intent(this, ListOfInstructor.class));
+            }
+            else if (itemId == R.id.menu_logout) {
+                startActivity(new Intent(this, CommonInterface.class));
+            }
+
 
             return true;
         });
